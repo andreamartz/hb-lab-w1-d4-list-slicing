@@ -15,8 +15,12 @@ def custom_len(input_list):
         8
 
     """
+    length = 0
 
-    return 0
+    for item in input_list:
+        length += 1
+
+    return length
 
 
 # For the next four exercises, you'll need to be clever and think about ways
@@ -44,7 +48,10 @@ def custom_append(input_list, value):
 
     """
 
-    pass
+    length = custom_len(input_list)   # find the length of the list
+
+    input_list[length:] = [value]
+    
 
 
 def custom_extend(input_list, second_list):
@@ -62,8 +69,9 @@ def custom_extend(input_list, second_list):
         True
 
     """
-
-    pass
+    
+    for item in second_list:
+        custom_append(input_list, item)
 
 
 def custom_insert(input_list, index, value):
@@ -81,7 +89,7 @@ def custom_insert(input_list, index, value):
 
     """
 
-    pass
+    input_list[index:index] = [value]
 
 
 def custom_remove(input_list, value):
@@ -100,7 +108,10 @@ def custom_remove(input_list, value):
 
     """
 
-    pass
+    for idx, item in enumerate(input_list):
+        if item == value:
+            input_list[idx:idx + 1] = []
+            break
 
 
 def custom_pop(input_list):
@@ -118,8 +129,26 @@ def custom_pop(input_list):
         ['Jan', 'Feb']
 
     """
+    last_item = input_list[-1]
+    custom_remove(input_list, last_item)
 
-    return None
+    return last_item
+
+def custom_pop_with_index(input_list, index):
+    """Remove the item at the given index in the list and return it.
+
+    The function custom_pop_with_index(input_list, index) should have the same functionality
+    and result as input_list.pop(index).
+
+    For example:
+
+        >>> months = ['Jan', 'Feb', 'March']
+        >>> custom_pop_with_index(months, 1)
+        'Feb'
+        >>> months
+        ['Jan', 'March']
+
+    """
 
 
 def custom_index(input_list, value):
@@ -135,7 +164,11 @@ def custom_index(input_list, value):
 
     """
 
-    return 0
+    for idx, item in enumerate(input_list):
+        if item == value:
+            return idx
+        
+    return -1
 
 
 def custom_count(input_list, value):
@@ -151,7 +184,12 @@ def custom_count(input_list, value):
 
     """
 
-    return 0
+    count = 0
+    for idx, item in enumerate(input_list):
+        if item == value:
+            count += 1
+        
+    return count
 
 
 def custom_reverse(input_list):
@@ -170,7 +208,38 @@ def custom_reverse(input_list):
 
     """
 
-    pass
+    # iterate over input_list
+        # ex. lst = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] 
+        # len = 10
+        # last index  = len -1 = 9
+        # lst.append(lst[9])  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9]
+        # lst.pop(9)          # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        # lst.append(lst[8])  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 8]
+        # lst.pop(8)          # [0, 1, 2, 3, 4, 5, 6, 7, 9, 8]
+        # lst.append(lst[7])  # [0, 1, 2, 3, 4, 5, 6, 7, 9, 8, 7]
+        # lst.pop(7)          # [0, 1, 2, 3, 4, 5, 6, 9, 8, 7]
+
+    idx = custom_len(input_list) - 1
+    # new_list = []
+
+    # for i in list(range(idx, -1, -1)):
+    #     custom_append(new_list, input_list[i])
+    
+    # for index, item in enumerate(new_list):
+    #     input_list[index] = new_list[index]
+
+    for i in list(range(idx, -1, -1)):
+        custom_remove(input_list, input_list[i])
+        custom_append(input_list, input_list[i])
+        custom_pop
+
+    return input_list
+    
+print(custom_reverse(['apple', 'berry', 'cherry', 'durian']))
+
+    # custom_insert(input_list, index, value):
+
+    # custom_remove(input_list, value):
 
 
 def custom_contains(input_list, value):
